@@ -12,12 +12,12 @@ class Blog
         $id = intval($id);
 
         if ($id) {
-                        
+
             $db = Db::getConnection();
-            
+
             $result = $db->query('SELECT * FROM blog WHERE id=' . $id);
             $result->setFetchMode(PDO::FETCH_ASSOC);
-            
+
             $blogItem = $result->fetch();
 
             return $blogItem;
@@ -27,19 +27,20 @@ class Blog
     /**
      * Returns an array of blog items
      */
-    public static function getBlogList() {
- 
+    public static function getBlogList()
+    {
+
         $db = Db::getConnection();
-        
+
         $blogList = array();
-        
+
         $result = $db->query('SELECT id, title, date, short_content '
-                . 'FROM blog '
-                . 'ORDER BY date DESC '
-                . 'LIMIT 3');        
+            . 'FROM blog '
+            . 'ORDER BY date DESC '
+            . 'LIMIT 3');
 
         $i = 0;
-        while($row = $result->fetch()) {
+        while ($row = $result->fetch()) {
             $blogList[$i]['id'] = $row['id'];
             $blogList[$i]['title'] = $row['title'];
             $blogList[$i]['date'] = $row['date'];
